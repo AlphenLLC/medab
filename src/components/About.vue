@@ -47,6 +47,7 @@ export default {
     /* Sabit marginler yerine padding ile iç boşluk verdik */
     padding: 60px 10%; 
     box-sizing: border-box;
+    background-color: #222;
 }
 
 .bio-container {
