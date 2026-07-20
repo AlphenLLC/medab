@@ -4,6 +4,8 @@
 		<Hero />
 		<About />
 		<Showcase />
+        <Banner />
+        <Contact />
 		<Footer />
 	</div>
 </template>
@@ -14,6 +16,8 @@ import Hero from './components/Hero.vue'
 import About from './components/About.vue'
 import Showcase from './components/Showcase.vue'
 import Footer from './components/Footer.vue'
+import Banner from './components/Banner.vue'
+import Contact from './components/Contact.vue'
 </script>
 
 <style>
