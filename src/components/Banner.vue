@@ -10,17 +10,17 @@
             <!-- Logo ve Başlık (Yan yana) -->
             <div class="header-group">
                 <!-- Medab logosunun yolunu src kısmına eklemelisin -->
-                <img src="/src/assets/medab-logo.png" alt="Medab Logo" class="brand-logo" />
+                <img src="" alt="Medab Logo" class="brand-logo" />
                 <h2>DERGİ</h2>
             </div>
 
             <!-- Açıklama Metni -->
             <p class="description">
-                Bilim, teknoloji ve sanata dair sınırları zorlayan yazılar, derinlemesine analizler ve kulübümüzden en güncel gelişmeler.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut accumsan erat, eget facilisis mi. Suspendisse a odio arcu. Suspendisse a purus vitae nisl tristique iaculis.
             </p>
 
             <!-- Oku Butonu (Rockstar tarzı beyaz hap buton) -->
-            <a href="https://www.varankfl.com/dergi" class="pill-btn">Oku</a>
+            <a href="" class="pill-btn">Oku</a>
             
         </div>
     </section>
@@ -49,7 +49,7 @@
     width: 100%;
     height: 100%;
     /* BURAYA KENDİ ARKA PLAN RESMİNİ EKLE */
-    background-image: url('https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2606&auto=format&fit=crop');
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw9A5RF6tkvNxdfzi0oaB4AwvvEfCtrbHfur9QcDJljw&s=10');
     background-size: cover;
     background-position: center;
     /* Rockstar havası: Tamamen siyah-beyaz ve düşük parlaklık */
