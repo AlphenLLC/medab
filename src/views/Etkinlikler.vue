@@ -23,10 +23,16 @@
           <span class="nokta"></span>
           <span class="nokta"></span>
         </div>
-<!-- toga -->
+<!-- toga easter egg -->
         <div v-else-if="tumEtkinliklerYuklendi" class="easter-egg-glance">
+          <p class="bitis-mesaji">How about we grow our little family together?</p>
           <div class="glance-bg"></div>
-          <p class="bitis-mesaji">Aramıza katılmaya ne dersin?</p>
+          <div class="katilim-alani">
+            <a href="#" class="btn_one">
+              Başvuru Yap <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+          
         </div>
       </div>
     </section>
@@ -37,12 +43,12 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import EtkinlikKarti from '../components/EtkinlikKarti.vue'
-import { eventCatalog } from '../data/eventCatalog.js' // MERKEZİ VERİ KAYNAĞIMIZ
+import { eventCatalog } from '../data/eventCatalog.js' 
 
 
 const etkinlikListesi = ref(eventCatalog)
 
-/* infinite scroll*/
+/* infinite scroll */
 const ekrandakiAdet = ref(2) 
 const yukleniyor = ref(false)
 const scrollTetikleyici = ref(null)
@@ -89,7 +95,6 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-
 .etkinlikler-sayfasi {
   position: relative;
   width: 100%;
@@ -126,7 +131,6 @@ onUnmounted(() => {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 1rem; 
-  
   position: relative; 
   z-index: 1; 
 
@@ -162,6 +166,7 @@ onUnmounted(() => {
 
   .yukleme-alani {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 60px;
@@ -186,58 +191,104 @@ onUnmounted(() => {
     .easter-egg-glance {
       position: relative;
       width: 100%;
-      height: 250px; 
-      display: flex;
-      align-items: center;
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
       justify-content: center;
-      margin-top: 1rem;
+      margin-top: 4rem; 
+      padding-bottom: 2rem;
       overflow: hidden;
-      animation: yavascaBelir 1.5s ease-out forwards;
       cursor: crosshair;
-
-      .glance-bg {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%; 
-        max-width: 500px;
-        height: 100%;
-        
-        background-image: url('https://i.pinimg.com/736x/16/bf/5b/16bf5b6ff0717c63aedf5056ce85dcd3.jpg'); 
-        background-size: cover;
-        background-position: center;
-        
-        opacity: 0.15; 
-        transition: opacity 0.5s ease, filter 0.5s ease;
-        filter: grayscale(100%) contrast(150%);
-        
-        -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 75%);
-        mask-image: radial-gradient(ellipse at center, black 10%, transparent 75%);
-      }
+      -webkit-tap-highlight-color: transparent;
+      gap: 1.5rem; 
 
       .bitis-mesaji {
-        position: relative;
-        z-index: 1;
-        color: #444444; 
-        font-size: 0.9rem;
-        letter-spacing: 4px;
+        color: #3f3f3f;
+        font-size: 1.1rem;
+        letter-spacing: 6px;
         text-transform: uppercase;
         font-weight: 800;
-        margin: 0;
-        transition: color 0.4s ease, text-shadow 0.4s ease;
-        pointer-events: none; 
+        margin: 0; 
+        z-index: 2;
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        pointer-events: none;
       }
 
-      &:hover {
-        .glance-bg {
-          opacity: 0.4; 
-          filter: grayscale(0%) contrast(120%); 
-        }
+      .glance-bg {
+        width: 100%; 
+        max-width: 500px; 
+        height: 180px;    
+        background-image: url('https://i.pinimg.com/736x/08/b3/0a/08b30a825948e2c487ceb51e040f59ad.jpg'); 
+        background-size: cover;
+        background-position: center 30%; 
+        opacity: 0.12; 
+        filter: grayscale(100%) blur(2px);
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        -webkit-mask-image: radial-gradient(ellipse at center, black 15%, transparent 60%);
+        mask-image: radial-gradient(ellipse at center, black 15%, transparent 60%);
+        z-index: 1;
+      }
+      
+      .katilim-alani {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1.5rem; 
         
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        z-index: 3;
+
+        .btn_one {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 15px;
+          font-weight: 700;
+          color: #000000;
+          background-color: #ffffff;
+          padding: 12px 28px;
+          border-radius: 50px;
+          letter-spacing: -0.5px;
+          transition: all 0.2s ease-in-out;
+          text-decoration: none;
+
+          i {
+            font-size: 13px;
+            transition: transform 0.2s ease;
+          }
+
+          &:hover {
+            background-color: #d1d5db;
+            i {
+              transform: translateX(5px);
+            }
+          }
+        }
+      }
+
+      &:hover, &:active {
         .bitis-mesaji {
           color: #ffffff; 
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+          text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+          transform: translateY(-5px); 
+        }
+        
+        .glance-bg {
+          opacity: 0.8; 
+          filter: grayscale(10%) blur(0px) contrast(130%); 
+          transform: scale(1.03);
+          -webkit-mask-image: radial-gradient(ellipse at center, black 55%, transparent 95%);
+          mask-image: radial-gradient(ellipse at center, black 55%, transparent 95%);
+        }
+        
+        .katilim-alani {
+          opacity: 1;
+          pointer-events: auto; 
+          transform: translateY(0);
         }
       }
     }
@@ -259,17 +310,6 @@ onUnmounted(() => {
   40% { transform: scale(1); }
 }
 
-@keyframes yavascaBelir {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (max-width: 768px) {
   .hero-arkaplan {
     height: 400px; 
@@ -286,6 +326,35 @@ onUnmounted(() => {
       .baslik-aciklamasi {
         font-size: 0.95rem;
         padding: 0 1rem;
+      }
+    }
+
+    .yukleme-alani {
+      .easter-egg-glance {
+        margin-top: 2rem;
+        gap: 1.5rem; 
+        
+        .bitis-mesaji {
+          font-size: 0.85rem; 
+          letter-spacing: 4px;
+        }
+
+        .glance-bg {
+          height: 160px; 
+          opacity: 0.18; 
+          
+          -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 60%);
+          mask-image: radial-gradient(ellipse at center, black 25%, transparent 60%);
+        }
+        
+        .katilim-alani {
+          margin-top: 0.5rem; 
+          
+          .btn_one { 
+            padding: 10px 24px; 
+            font-size: 14px; 
+          }
+        }
       }
     }
   }

@@ -2,38 +2,87 @@
   <div class="gallery-container">
     <div class="gallery-grid">
       <div
-        v-for="(image, index) in images"
+        v-for="(image, index) in goruntulenenResimler"
         :key="index"
         class="gallery-item"
         @click="openLightbox(index)"
       >
-        <img :src="image.url" :alt="image.alt" loading="lazy" />
+        <img :src="image.url" :alt="image.alt || 'MEDAB Galeri'" loading="lazy" />
+      </div>
+    </div>
+    <!-- Infinite Scroll Yükleme -->
+    <div ref="scrollTetikleyici" class="yukleme-alani">
+      <div v-if="yukleniyor" class="yukleniyor-animasyonu">
+        <span class="nokta"></span>
+        <span class="nokta"></span>
+        <span class="nokta"></span>
       </div>
     </div>
     <Teleport to="body">
       <div v-if="lightboxOpen" class="lightbox" @click.self="closeLightbox">
-        <button class="close-btn" @click="closeLightbox">✕</button>
-        
-        <button class="nav-btn prev" @click="prevImage" v-if="images.length > 1">❮</button>
-        
+        <button class="close-btn" @click="closeLightbox">✕</button>       
+        <button class="nav-btn prev" @click="prevImage" v-if="images.length > 1">❮</button>        
         <div class="lightbox-content">
-          <img :src="images[currentIndex].url" :alt="images[currentIndex].alt" class="lightbox-img" />
+          <img :src="images[currentIndex].url" :alt="images[currentIndex].alt || 'MEDAB Galeri'" class="lightbox-img" />
         </div>
-
         <button class="nav-btn next" @click="nextImage" v-if="images.length > 1">❯</button>
       </div>
     </Teleport>
-    
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
   images: {
     type: Array,
     required: true
+  }
+});
+
+/* --- Infinite Scroll --- */
+const ekrandakiAdet = ref(4); 
+const yukleniyor = ref(false);
+const scrollTetikleyici = ref(null);
+let observer = null;
+
+const goruntulenenResimler = computed(() => {
+  return props.images.slice(0, ekrandakiAdet.value);
+});
+
+const tumResimlerYuklendi = computed(() => {
+  return ekrandakiAdet.value >= props.images.length;
+});
+
+const dahaFazlaYukle = () => {
+  if (tumResimlerYuklendi.value || yukleniyor.value) return;
+  
+  yukleniyor.value = true;
+  
+  setTimeout(() => {
+    ekrandakiAdet.value += 4; // Her kaydırmada 4 resim daha yükler
+    yukleniyor.value = false;
+  }, 600);
+};
+
+onMounted(() => {
+  observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      dahaFazlaYukle();
+    }
+  }, {
+    rootMargin: '0px 0px 100px 0px' 
+  });
+
+  if (scrollTetikleyici.value) {
+    observer.observe(scrollTetikleyici.value);
+  }
+});
+
+onUnmounted(() => {
+  if (observer && scrollTetikleyici.value) {
+    observer.unobserve(scrollTetikleyici.value);
   }
 });
 
@@ -61,15 +110,19 @@ const prevImage = () => {
 </script>
 
 <style scoped>
-/* =========================================
-   GALERİ IZGARASI (GRID)
-========================================= */
+.gallery-container {
+  width: 100%;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%; 
+  justify-items: center;
+  box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
@@ -86,6 +139,8 @@ const prevImage = () => {
   background-color: #000;
   aspect-ratio: 16 / 9;
   min-height: 200px;
+  width: 100%;
+  max-width: 100%; 
 }
 
 .gallery-item img {
@@ -93,6 +148,39 @@ const prevImage = () => {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* =========================================
+   INFINITE SCROLL 
+========================================= */
+.yukleme-alani {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+.yukleniyor-animasyonu {
+  display: flex;
+  gap: 6px;
+}
+
+.yukleniyor-animasyonu .nokta {
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff; /* Karanlık estetiğe uygun beyaz noktalar */
+  border-radius: 50%;
+  animation: sicrama 1.4s infinite ease-in-out both;
+}
+
+.yukleniyor-animasyonu .nokta:nth-child(1) { animation-delay: -0.32s; }
+.yukleniyor-animasyonu .nokta:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes sicrama {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
 }
 
 .lightbox {
