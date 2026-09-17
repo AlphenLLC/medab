@@ -17,10 +17,12 @@
     <loc>https://imumedab.com/ekibimiz</loc>
     <priority>0.7</priority>
   </url>
+  <!--
   <url>
     <loc>https://imumedab.com/dergi</loc>
     <priority>0.7</priority>
   </url>
+  -->
   <url>
     <loc>https://imumedab.com/galeri</loc>
     <priority>0.6</priority>
