@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 
 <head>
   <meta charset="UTF-8" />
@@ -11,6 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Temel SEO -->
   <meta name="description" content="İstanbul Medeniyet Üniversitesi MedAB resmi web sitesi. Tıp ve bilim odaklı akademik faaliyetler, araştırmalar ve etkinlikler." />
   <meta name="keywords"
@@ -28,18 +29,23 @@
   <meta name="twitter:title" content="MedAB | Medeniyet Akademik ve Bilimsel Faaliyetler Kulübü" />
   <meta name="twitter:description" content="İstanbul Medeniyet Üniversitesi MedAB resmi web sitesi. Tıp ve bilim odaklı akademik faaliyetler, araştırmalar ve etkinlikler." />
   <meta name="twitter:image" content="https://imumedab.com/banner.png" />
+
   <title>MedAB | Medeniyet Akademik ve Bilimsel Faaliyetler Kulübü</title>
+
   <script>
-    (function () {
-      const redirect = sessionStorage.redirect;
-      delete sessionStorage.redirect;
-      if (redirect && redirect !== location.href) {
-        history.replaceState(null, null, redirect);
+    (function (l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function (s) {
+          return s.replace(/~and~/g, '&');
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
       }
-    })();
+    }(window.location));
   </script>
-  <script type="module" crossorigin src="/assets/index.eac792e4.js"></script>
-  <link rel="stylesheet" href="/assets/index.10353f71.css">
+  <script type="module" crossorigin src="/assets/index.9d17486d.js"></script>
+  <link rel="stylesheet" href="/assets/index.cbf07ee1.css">
   <link rel="canonical" href="https://imumedab.com/" />
 </head>
 
