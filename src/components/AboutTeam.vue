@@ -1,19 +1,19 @@
 <template>
-    <section class="about-page">
+    <section class="about-hero-section">
+        <div class="hero-arkaplan">
+            <div class="fade-overlay"></div>
+        </div>
+
         <div class="about-warp">
             <div class="container">
-                <div class="about-layout">
-                    <div class="about-text">
-                        <h2 class="section-title">MEDAB <span class="ikincil">EKİBİ </span></h2>
-                        <p class="section-description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet metus ullamcorper, condimentum turpis eget, interdum ex. Curabitur aliquet, libero vel commodo lobortis, justo velit euismod tellus, eget ornare neque eros sodales sapien. Morbi efficitur orci nisi, iaculis blandit dui pharetra vel.
-                        </p>
-                    </div>
-
-                    <div class="about-image">
-                        <img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ekip Fotoğrafı" class="team-image" />
-                    </div>
+                
+                <div class="baslik-kapsayici">
+                    <h2 class="title">MEDAB EKİBİ</h2>
+                    <p class="baslik-aciklamasi">
+                        MEDAB; bilimsel merakı teşvik eden, öğrencilerin birbirlerinden ve hocalarından öğrenmesini destekleyen, farklı bakış açılarını bir araya getiren ve tıp fakültesi eğitimine değer katmayı amaçlayan dinamik bir öğrenci topluluğudur. Çalışmalarımızı yalnızca öğrenciler arası bir yapı olarak değil, fakültemizin akademik kadrosuyla karşılıklı iletişim ve iş birliği içerisinde sürdürüyoruz.
+                    </p>
                 </div>
+
             </div>
         </div>
     </section>
@@ -23,115 +23,104 @@
 </script>
 
 <style scoped>
-    .about-page {
-        background-color: #000000; 
-        color: #ffffff;
-        text-align: left;
+    .about-hero-section {
         position: relative; 
+        width: 100%;
+        background-color: #000000;
+    }
+
+    .hero-arkaplan {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 520px; 
+        background-image: url('../../public/branding/ekip-banner.webp'); 
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+        pointer-events: none; 
+    }
+
+    .hero-arkaplan .fade-overlay {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom, 
+            rgba(0, 0, 0, 0.4) 0%, 
+            rgba(0, 0, 0, 0.85) 60%, 
+            #000000 100%
+        );
     }
 
     .about-warp {
         width: 100%;
-        padding: 6.5rem 0 1.5rem 0; 
+        padding-top: 155px;
+        padding-bottom: 2rem;
+        box-sizing: border-box;
+        position: relative; 
+        z-index: 1; 
+        display: flex;
+        justify-content: center;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 860px;
+        padding: 0 1.5rem;
         box-sizing: border-box;
     }
 
-    .about-layout {
-        display: flex;
-        align-items: center;
-        gap: 3rem; 
+    .baslik-kapsayici {
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
     }
 
-    .about-text {
-        flex: 1;
-    }
-
-    .section-title {
-        font-size: 3rem;
-        margin-bottom: 1rem;
+    .title {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: clamp(2.8rem, 5.8vw, 4.2rem); 
         color: #ffffff;
+        letter-spacing: -2px;
+        line-height: 1.0;
+        margin: 0 0 1.5rem 0;
         text-transform: uppercase;
-        font-weight: 900;
-        letter-spacing: 2px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95);
     }
 
-    .section-description {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        margin-bottom: 1.5rem;
-        color: #d1d1d1;
-        text-align: justify;
-        font-weight: normal; 
-    }
-
-    .about-image {
-        flex: 1.2; 
-        display: flex;
-        justify-content: center;
-        position: relative;
-        width: 100%;
-    }
-
-    .team-image {
-        width: 100%;
-        height: 400px; 
-        object-fit: cover;
-        border-radius: 4px;
-        display: block;
-    }
-
-    .ikincil {
-        color: #2196fd;
-    }
-
-    @media (max-width: 1000px) {
-        .about-warp {
-            padding: 5rem 15px 1.5rem 15px; 
-        }
+    .baslik-aciklamasi {
+        font-family: 'Montserrat', sans-serif;
+        color: #a1a1aa;
+        font-size: 1.05rem;
+        font-weight: 400;
+        max-width: 720px;
+        margin: 0 auto;
+        line-height: 1.75;
+        text-align: center;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
     }
 
     @media (max-width: 768px) {
-        .about-layout {
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-        
-        .about-text {
-            position: relative;
-            z-index: 1; 
-            padding-top: 60px; 
+        .hero-arkaplan {
+            height: 380px; 
         }
 
-        .section-title {
-            text-align: center; 
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 15px rgba(0,0,0,0.9); 
+        .about-warp {
+            padding-top: 110px; 
+            padding-bottom: 1rem;
         }
 
-        .section-description {
-            text-align: center; 
+        .title { 
+            font-size: 2.4rem; 
+            letter-spacing: -1.2px;
+            margin-bottom: 1.2rem;
         }
 
-        .about-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%; 
-            height: 450px; 
-            z-index: 0;
-        }
-
-        .team-image {
-            height: 100%; 
-            border-radius: 0;
-        }
-
-        .about-image::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 60%, #000000 100%);
-            pointer-events: none;
+        .baslik-aciklamasi {
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
     }
 </style>

@@ -8,7 +8,7 @@
             </div>
         </div>
         <transition name="fade">
-            <div class="collapse" v-if="expanded">
+            <div v-if="expanded" class="collapse">
                 <div class="card-body">
                     <p>{{ info.answer }}</p>
                 </div>
@@ -22,15 +22,15 @@ import Badge from './Badge.vue';
 
 export default {
     name: 'AccordionItem',
+    components: {
+        Badge
+    },
     props: {
         info: {
             type: Object,
             required: true
         },
         badgeNumber: Number
-    },
-    components: {
-        Badge
     },
     data: () => ({
         expanded: false
@@ -44,15 +44,6 @@ export default {
 </script>
 
 <style scoped>
-.funkyCollapse-active {
-    transition: all 0.5s cubic-bezier(0.625, 0.225, 0.100, 0.890);
-}
-
-.funkyCollapse-enter-from,
-.funkyCollapse-leave-to {
-    opacity: 0;
-}
-
 .fade-enter-active,
 .fade-leave-active {
     transition: all 0.2s cubic-bezier(0.625, 0.225, 0.100, 0.890);
@@ -67,24 +58,16 @@ export default {
 
 .card-container {
     margin-bottom: 0;
-}
-
-.faq-title h1 {
-    padding: 5px 0px;
-    border-bottom: 4px solid #0ea5e9;
-    width: 8%;
-}
-
-.faq-title p {
-    padding: 0 190px;
+    width: 100%;
 }
 
 .card {
     border: none;
     background: #111111;
-    border-bottom: 1px solid #222222;
+    border: 1px solid #222222;
     margin-bottom: 10px;
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
 .faq .card .card-header {
@@ -92,57 +75,68 @@ export default {
     border: none;
     background: transparent;
     border-radius: 8px;
-    -webkit-transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
+    transition: all 0.25s ease;
+    cursor: pointer;
 }
 
 .card .card-header:hover {
-    background: rgba(12, 74, 110, 0.4); 
-    padding-left: 10px;
+    background: rgba(3, 105, 161, 0.35); 
+    padding-left: 6px;
 }
-
 
 .card .card-header .faq-title {
     text-align: left;
-    padding: 0px;
-    padding-left: 30px;
-    padding-right: 30px;
+    display: flex;
+    align-items: center;
+    padding: 22px 28px;
     font-weight: 500;
     font-size: 16px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     color: #e2e8f0;
     text-decoration: none !important;
-    -webkit-transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-    padding-top: 25px;
-    padding-bottom: 25px;
     margin: 0;
+    box-sizing: border-box;
 }
 
+/* Yanıt gövdesi justify yapıldı */
 .card .card-body {
-    padding: 20px 30px 30px 35px;
+    padding: 20px 28px 26px 28px;
     font-weight: 400;
     font-size: 15px;
     color: #a0aec0;
-    line-height: 28px;
-    letter-spacing: 1px;
+    line-height: 27px;
+    letter-spacing: 0.4px;
     border-top: 1px solid #222222;
-    word-spacing: normal;
     text-align: justify;
+    text-justify: inter-word;
+    box-sizing: border-box;
+}
+
+.card .card-body p {
+    margin: 0;
 }
 
 .collapse {
-    overflow: hidden
+    overflow: hidden;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
+    .card .card-header:hover {
+        padding-left: 0px;
+    }
+
     .card .card-header .faq-title {
-        line-height: 26px;
+        padding: 16px 18px;
+        font-size: 15px;
+        line-height: 24px;
+    }
+
+    .card .card-body {
+        padding: 16px 18px 20px 18px;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: justify;
+        text-justify: inter-word;
     }
 }
 </style>

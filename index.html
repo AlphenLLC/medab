@@ -1,17 +1,59 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>medab</title>
+
+  <title>MedAB | Medeniyet Akademik ve Bilimsel Faaliyetler Kulübü</title>
+  <meta name="description"
+    content="İstanbul Medeniyet Üniversitesi MedAB resmi web sitesi. Tıp ve bilim odaklı akademik faaliyetler, araştırmalar ve etkinlikler." />
+  <meta name="keywords"
+    content="MedAB, Medeniyet Üniversitesi, tıp kulübü, bilim, araştırma, imumedab, imu medab, imümedab, imü medab, imü, imu, istanbul medeniyet üniversitesi, medeniyet tıp, istanbul medeniyet üniversitesi tıp fakültesi, imü tıp, imu tıp, imu tip, adli tıp, adli tıp sempozyumu, medab adli tıp, medab katıl" />
+
+  <!-- Sosyal Medya Önizlemeleri (Open Graph) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://imumedab.com/" />
+  <meta property="og:title" content="MedAB | Medeniyet Akademik ve Bilimsel Faaliyetler Kulübü" />
+  <meta property="og:description"
+    content="İstanbul Medeniyet Üniversitesi MedAB resmi web sitesi. Tıp ve bilim odaklı akademik faaliyetler, araştırmalar ve etkinlikler." />
+  <meta property="og:image" content="https://imumedab.com/banner.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MedAB | Medeniyet Akademik ve Bilimsel Faaliyetler Kulübü" />
+  <meta name="twitter:description"
+    content="İstanbul Medeniyet Üniversitesi MedAB resmi web sitesi. Tıp ve bilim odaklı akademik faaliyetler, araştırmalar ve etkinlikler." />
+  <meta name="twitter:image" content="https://imumedab.com/banner.png" />
+
+  <!-- 1. Hero LCP Görselleri (Preload) -->
+  <link rel="preload" as="image" href="/assets/ataturk-mobile.webp" type="image/webp" media="(max-width: 860px)"
+    fetchpriority="high" />
+  <link rel="preload" as="image" href="/assets/ataturk2.webp" type="image/webp" media="(min-width: 861px)"
+    fetchpriority="high" />
+
+  <!-- 2. Yerel Fontlar (Preload) -->
+  <link rel="preload" href="/fonts/archivo-black-v23-latin_latin-ext-regular.woff2" as="font" type="font/woff2"
+    crossorigin />
+  <link rel="preload" href="/fonts/montserrat-v31-latin_latin-ext-regular.woff2" as="font" type="font/woff2"
+    crossorigin />
+  <link rel="preload" href="/fonts/montserrat-v31-latin_latin-ext-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/montserrat-v31-latin_latin-ext-700.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- GitHub Pages SPA Yönlendirme Çözücü -->
+  <script>
+    (function (l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function (s) {
+          return s.replace(/~and~/g, '&');
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location));
+  </script>
 </head>
 
 <body>

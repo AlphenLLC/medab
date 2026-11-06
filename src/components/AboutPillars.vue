@@ -1,17 +1,25 @@
 <template>
-    <section class="faq-section">
-        <div class="faq-warp">
-            <div class="container">
+    <section class="teams-section">
+        <div class="container">
+            
+            <div class="baslik-kapsayici">
                 <h2 class="section-title">EKİPLER</h2>
                 <p class="section-description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet metus ullamcorper, condimentum turpis eget, interdum ex. Curabitur aliquet, libero vel commodo lobortis, justo velit euismod tellus, eget ornare neque eros sodales sapien.
+                    MedAB'ın çalışma alanları; akademik ve bilimsel faaliyetlerden mesleki beceri eğitimlerine, multidisipliner çalışmalardan sosyal sorumluluk ve öğrenci etkileşimine uzanmaktadır.
                 </p>
-                <div class="row">
-                    <div class="faq">
-                        <AccordionItem v-for="(faq, index) in faqs" :key="faq" :info="faq" :badgeNumber="index + 1" />
-                    </div>
+            </div>
+
+            <div class="row">
+                <div class="faq">
+                    <AccordionItem 
+                        v-for="(faq, index) in faqs" 
+                        :key="index" 
+                        :info="faq" 
+                        :badge-number="index + 1" 
+                    />
                 </div>
             </div>
+
         </div>
     </section>
 </template>
@@ -21,7 +29,7 @@ import Badge from './accordion/Badge.vue';
 import AccordionItem from './accordion/AccordionItem.vue';
 
 export default {
-    name: 'FaqSection',
+    name: 'AboutPillars',
     components: {
         Badge,
         AccordionItem 
@@ -30,60 +38,73 @@ export default {
         faqs: [
             {
                 question: 'Bilimsellik Ekibi',
-                answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non metus eget sapien congue vulputate. Cras pulvinar ligula sem, ac dictum dolor mattis a. Aenean vel posuere nunc. Proin molestie turpis at mauris accumsan, eu hendrerit massa scelerisque.'
+                answer: "MedAB'ın akademik ve bilimsel çalışmalarının merkezinde yer alan Bilimsellik Ekibi; öğrencilerin bilimsel düşünme, araştırma ve üretme süreçlerine aktif olarak katılmalarını destekler. Bilimsel etkinlik, konferans ve seminerlerin içeriklerini hazırlar, Perspective için bilimsel ve akademik içerikler geliştirir."
             },
             {
                 question: 'Halkla İlişkiler Ekibi',
-                answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non metus eget sapien congue vulputate. Cras pulvinar ligula sem, ac dictum dolor mattis a. Aenean vel posuere nunc. Proin molestie turpis at mauris accumsan, eu hendrerit massa scelerisque.'
+                answer: "MedAB'ın fakülte içerisindeki ve dışındaki iletişim süreçlerini yürütür; kulübümüzün farklı kişi, kurum ve topluluklarla olan ilişkilerinin geliştirilmesine katkı sağlar. Fakülte akademik kadrosuyla ve diğer topluluklarla ortak çalışma ve koordinasyonu yürütür."
             },
             {
                 question: 'Sosyal Ekip',
-                answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non metus eget sapien congue vulputate. Cras pulvinar ligula sem, ac dictum dolor mattis a. Aenean vel posuere nunc. Proin molestie turpis at mauris accumsan, eu hendrerit massa scelerisque.'
+                answer: "Öğrencilerin fakülte yaşamına aktif katılımını ve birbirleriyle olan iletişimlerini güçlendirmeye yönelik çalışmalar yürütür. Tanışma etkinlikleri, sosyal organizasyonlar, atölyeler ve fakülte aidiyetini artıracak faaliyetler planlar."
             },
             {
                 question: 'Maliye Ekibi',
-                answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non metus eget sapien congue vulputate. Cras pulvinar ligula sem, ac dictum dolor mattis a. Aenean vel posuere nunc. Proin molestie turpis at mauris accumsan, eu hendrerit massa scelerisque.'
+                answer: "MedAB'ın faaliyetlerinin sürdürülebilir ve düzenli bir şekilde yürütülmesini sağlayan mali süreçleri yönetir. Kulübün bütçe planlamasını yapar, gelir-gider takibini yürütür ve etkinliklerin finansal organizasyonunu planlar."
             },
             {
-                question: 'Bilişim Ekibi',
-                answer: 'elifimi çok seviyorum'
-            },
+                question: 'MedAB Commonworks',
+                answer: "MedAB'ın dijital altyapısını ve teknolojik süreçlerini yönetir. İnternet sayfasının geliştirilmesini ve güncel tutulmasını sağlar, kulübün dijital platformlarını yönetir ve bilgiye erişimi teknolojiyle güçlendirir."
+            }
         ]
     })
 }
 </script>
 
 <style scoped>
-.faq-section {
-    font-weight: bold;
+.teams-section {
+    background-color: #000000;
     text-align: left;
+    padding: 30px 0 6rem 0;
 }
 
-.faq-warp {
+.container {
     width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
     box-sizing: border-box;
-    padding: 2vh 0; 
+}
+
+.baslik-kapsayici {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2.2rem;
 }
 
 .section-title {
-    font-size: 3rem;
-    margin-bottom: 1rem; 
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.2rem); 
+    margin-bottom: 0.8rem;
     color: #ffffff;
+    letter-spacing: -1.5px;
+    line-height: 1;
     text-transform: uppercase;
-    font-weight: 900;
-    letter-spacing: 2px;
 }
 
 .section-description {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 2.5rem; 
-    color: #d1d1d1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #cccccc;
     text-align: justify;
-    font-weight: normal; 
+    text-justify: inter-word;
+    max-width: 750px;
+    margin: 0 auto;
+    font-weight: 400;
 }
 
-.faq-section .row {
+.row {
     width: 100%;
     margin: 0;
 }
@@ -93,27 +114,30 @@ export default {
     box-shadow: none;
     border-radius: 4px;
     width: 100%;
-    flex: 0 0 100%; 
-    max-width: 100%;
-}
-
-@media (max-width: 1000px) {
-    .faq {
-        margin-bottom: 30px;
-    }
-    .faq-warp {
-        padding: 2vh 15px; 
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 @media (max-width: 768px) {
-    .section-title {
-        font-size: 2.5rem;
-        text-align: center;
+    .teams-section {
+        padding: 20px 0 4rem 0;
     }
-    
+
+    .baslik-kapsayici {
+        margin-bottom: 1.8rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+    }
+
     .section-description {
-        text-align: center; 
+        font-size: 0.95rem;
+        text-align: justify;
+        text-justify: inter-word;
+        padding: 0 0.5rem;
     }
 }
 </style>

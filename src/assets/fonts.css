@@ -1,0 +1,37 @@
+/* src/assets/fonts.css */
+
+/* montserrat-regular */
+@font-face {
+  font-display: swap;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/montserrat-v31-latin_latin-ext-regular.woff2') format('woff2');
+}
+
+/* montserrat-600 */
+@font-face {
+  font-display: swap;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/fonts/montserrat-v31-latin_latin-ext-600.woff2') format('woff2');
+}
+
+/* montserrat-700 */
+@font-face {
+  font-display: swap;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/montserrat-v31-latin_latin-ext-700.woff2') format('woff2');
+}
+
+/* archivo-black-regular */
+@font-face {
+  font-display: swap;
+  font-family: 'Archivo Black';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/archivo-black-v23-latin_latin-ext-regular.woff2') format('woff2');
+}

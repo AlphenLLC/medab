@@ -1,115 +1,111 @@
 <template>
-    <footer class="footer">
-        <div class="footer-text">
-            <span class="est">EST. MMXXII</span>
-            <span class="divider">|</span>
-            <a href="https://www.youtube.com/watch?v=aAg3bwzSuLk" target="_blank" class="brand">Alphen Limited</a>
-        </div>
-        <div class="footer-img-wrapper">
-            <div class="shadow-overlay"></div>
-        </div>
-    </footer>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-locations">
+        <span>İstanbul</span>
+        <span class="loc-dot">•</span>
+        <span>Paris</span>
+      </div>
+      <div class="footer-tag">
+        <span class="est">EST. MMXXV</span>
+        <span class="sep">|</span>
+        <a 
+          href="https://www.youtube.com/watch?v=EBhn7JtdKaQ" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="brand"
+        >
+          Commonworks
+        </a>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
-.footer {
-    position: relative;
-    width: 100%;
-    min-height: 70px; 
-    background-color: #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    border-top: none;
-    overflow: hidden;
+.site-footer {
+  position: relative;
+  width: 100%;
+  min-height: 56px;
+  background-color: #000000;
+  border-top: none;
+  display: flex;
+  align-items: center;
+  padding: 16px 8%;
+  box-sizing: border-box;
 }
 
-.footer-text {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    z-index: 2;
-    padding: 0 15px; 
+.footer-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
-.est, .brand, .motto {
-    font-size: 13px; 
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-decoration: none;
-    transition: color 0.3s ease;
+.footer-locations {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  color: #71717a;
+  text-transform: uppercase;
+}
+
+.loc-dot {
+  color: #3f3f46;
+  font-size: 9px;
+}
+
+.footer-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11.5px;
+  letter-spacing: 0.6px;
 }
 
 .est {
-    color: #979696;
+  color: #71717a;
+  font-weight: 600;
+}
+
+.sep {
+  color: #27272a;
+  font-size: 11px;
 }
 
 .brand {
-    color: #f8bc2b; 
-    font-weight: 700;
-}
-
-.motto {
-    color: #979696;
+  color: #d4d4d8;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .brand:hover {
-    color: #ffffff;
-}
-
-.divider {
-    color: #222222;
-    font-size: 14px;
-}
-
-.footer-img-wrapper {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 160px; 
-    background-image: url('https://i.pinimg.com/736x/73/67/5f/73675f4ea4e9dbd3782c5087e608637e.jpg'); /*toptoga*/
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
-}
-
-.shadow-overlay {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, #000000 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.85) 100%);
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
-    .footer {
-        padding: 30px 0; 
-    }
+  .site-footer {
+    padding: 18px 6%;
+  }
 
-    .footer-text {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-        width: 100%;
-        padding: 0;
-        z-index: 3;
-    }
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 
-    .divider {
-        display: none;
-    }
-
-    .footer-img-wrapper {
-        width: 150px; 
-        clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
-        opacity: 0.15;
-        filter: grayscale(100%);
-        z-index: 1;
-    }
-
-    .shadow-overlay {
-        background: linear-gradient(to right, #000000 0%, transparent 100%);
-    }
+  .footer-locations {
+    font-size: 10px;
+    gap: 6px;
+  }
 }
 </style>

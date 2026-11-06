@@ -1,34 +1,36 @@
 <template>
-  <div class="etkinlik-karti" :class="etkinlik.durum">
+  <article class="etkinlik-karti" :class="etkinlik.durum">
     <div class="icerik-alani">
-      <h3 class="baslik">{{ etkinlik.baslik }}</h3>
+      <h2 class="baslik">
+        <router-link :to="`/etkinlik/${etkinlik.id}/`" class="baslik-link">
+          {{ etkinlik.baslik }}
+        </router-link>
+      </h2>
       <div class="durum-metni" :class="etkinlik.durum">
         {{ formatDurum(etkinlik.durum) }}
       </div>
       <div class="detaylar">
         <span class="tarih">
-          <Calendar class="ikon" :size="16" />
+          <AppIcon name="calendar" class="ikon" :size="16" />
           {{ etkinlik.tarih }}
         </span>
-        <span class="yer" v-if="etkinlik.yer">
-          <MapPin class="ikon" :size="16" />
+        <span v-if="etkinlik.yer" class="yer">
+          <AppIcon name="map-pin" class="ikon" :size="16" />
           {{ etkinlik.yer }}
         </span>
-      </div> 
+      </div>
       <p class="aciklama">{{ etkinlik.aciklama }}</p>
-      <router-link :to="`/etkinlik/${etkinlik.id}`" class="btn_one">
-        Devamını Gör <ArrowRight class="ok-ikonu" :size="16" />
+      <router-link :to="`/etkinlik/${etkinlik.id}/`" class="btn_one">
+        Devamını Gör <AppIcon name="arrow-right" class="ok-ikonu" :size="16" />
       </router-link>
     </div>
-    <div class="resim-alani">
-      <img :src="etkinlik.resim" :alt="etkinlik.baslik" />
-    </div>
-  </div>
+    <router-link :to="`/etkinlik/${etkinlik.id}/`" class="resim-alani" tabindex="-1" :aria-label="etkinlik.baslik">
+      <img :src="etkinlik.resim" :alt="etkinlik.baslik" loading="lazy" decoding="async" />
+    </router-link>
+  </article>
 </template>
 
 <script setup>
-import { Calendar, MapPin, ArrowRight } from 'lucide-vue-next'
-
 defineProps({
   etkinlik: {
     type: Object,
@@ -49,26 +51,26 @@ const formatDurum = (durum) => {
 <style lang="scss" scoped>
 .etkinlik-karti {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   justify-content: space-between;
-  background-color: #000000; 
-  border: 1px solid #1f1f1f; 
-  border-radius: 4px; 
+  background-color: #000000;
+  border: 1px solid #1f1f1f;
+  border-radius: 4px;
   overflow: hidden;
   transition: border-color 0.3s ease;
 
   &:hover {
-    border-color: #444444; 
+    border-color: #444444;
   }
 
   .icerik-alani {
-    flex: 1; 
+    flex: 1;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start; 
-    text-align: left; 
+    align-items: flex-start;
+    text-align: left;
 
     .baslik {
       margin: 0 0 0.4rem 0;
@@ -77,6 +79,16 @@ const formatDurum = (durum) => {
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+
+      .baslik-link {
+        color: inherit;
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 0.85;
+        }
+      }
     }
 
     .durum-metni {
@@ -98,15 +110,15 @@ const formatDurum = (durum) => {
       margin-bottom: 1.2rem;
       font-size: 0.9rem;
       color: #777777;
-      
+
       span {
         display: flex;
         align-items: center;
-        gap: 0.5rem; 
+        gap: 0.5rem;
       }
 
       .ikon {
-        color: #aaaaaa; 
+        color: #aaaaaa;
       }
     }
 
@@ -122,7 +134,7 @@ const formatDurum = (durum) => {
       display: inline-flex;
       text-decoration: none;
       align-items: center;
-      gap: 12px; 
+      gap: 12px;
       font-family: 'Montserrat', sans-serif;
       font-size: 16px;
       font-weight: 700;
@@ -136,12 +148,13 @@ const formatDurum = (durum) => {
       transition: all 0.2s ease-in-out;
 
       .ok-ikonu {
+        display: inline-block;
         transition: transform 0.2s ease;
       }
 
       &:hover {
         background-color: #d1d5db;
-        
+
         .ok-ikonu {
           transform: translateX(5px);
         }
@@ -150,28 +163,30 @@ const formatDurum = (durum) => {
   }
 
   .resim-alani {
-    width: 40%; 
-    min-width: 250px; 
-    background-color: #0a0a0a; 
+    width: 40%;
+    min-width: 250px;
+    background-color: #0a0a0a;
     position: relative;
-    
+    display: block;
+    text-decoration: none;
+
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover; 
+      object-fit: cover;
       display: block;
-      opacity: 0.8; 
+      opacity: 0.8;
       transition: opacity 0.3s ease;
     }
   }
 
   &:hover .resim-alani img {
-    opacity: 1; 
+    opacity: 1;
   }
 
   @media (max-width: 650px) {
-    flex-direction: column-reverse; 
-    
+    flex-direction: column-reverse;
+
     .icerik-alani {
       padding: 1.5rem;
     }

@@ -1,12 +1,12 @@
 <template>
-    <div id="app">
-        <Header />
-        <main>
-            <router-view />
-        </main>
-        <Contact />
-        <Footer />
-    </div>
+  <div class="app-shell">
+    <Header />
+    <main class="page-viewport-container">
+      <router-view />
+    </main>
+    <Contact />
+    <Footer />
+  </div>
 </template>
 
 <script setup>
@@ -17,22 +17,25 @@ import Footer from './components/Footer.vue'
 
 <style>
 html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-#app {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+#app, .app-shell {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-main {
-    flex: 1;
+.page-viewport-container {
+  flex: 1;
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
 }
 </style>

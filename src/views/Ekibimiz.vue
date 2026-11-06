@@ -1,12 +1,10 @@
 <template>
-  <section class="about-page">
-   <div class="about-team">
-<AboutTeam />
-  </div>
-  </section>
-      <div class="team-container">
+  <main class="ekibimiz-sayfasi">
+    <AboutTeam />
+    <section class="team-container">
       <TeamList />
-    </div>
+    </section>
+  </main>
 </template>
 
 <script setup>
@@ -15,31 +13,22 @@ import AboutTeam from '../components/AboutTeam.vue'
 </script>
 
 <style scoped>
-.about-page {
-  padding: 0; 
-}
-
-.about-team {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 4rem;
+.ekibimiz-sayfasi {
+  width: 100%;
+  background-color: #000000;
+  min-height: 100vh;
 }
 
 .team-container {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 4rem;
+  padding: 4rem 1rem;
 }
 
 @media (max-width: 768px) {
   .team-container {
-    flex-direction: column;
+    padding: 2rem 1rem;
     text-align: center;
-    gap: 2rem;
   }
 }
 </style>

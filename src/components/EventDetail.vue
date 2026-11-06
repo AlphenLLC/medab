@@ -1,5 +1,5 @@
 <template>
-  <div class="event-detail-page" v-if="selectedItem">
+  <div v-if="selectedItem" class="event-detail-page">
     <header class="hero">
       <img :src="selectedItem.heroImage" :alt="selectedItem.title" class="hero-bg" />
       <div class="hero-content">
@@ -17,7 +17,7 @@
         </div>       
       </template>
     </main>
-    <section class="gallery-section" v-if="selectedItem.gallery && selectedItem.gallery.length > 0">
+    <section v-if="selectedItem.gallery && selectedItem.gallery.length > 0" class="gallery-section">
       <h2>Etkinlikten Kareler</h2>
       <div class="gallery-grid">
         <img 
@@ -31,7 +31,7 @@
   </div>
   <div v-else class="not-found">
     <h1>Etkinlik Bulunamadı</h1>
-    <router-link to="/etkinlikler">Etkinliklere Dön</router-link>
+    <router-link to="/etkinlikler/">Etkinliklere Dön</router-link>
   </div>
 </template>
 

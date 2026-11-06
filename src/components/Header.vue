@@ -2,32 +2,37 @@
   <header :class="{ 'is-scrolled': hasScrolled, 'is-menu-open': isMenuOpen, 'is-hidden': isHidden }">
     <div class="header-container">
       <div class="brand">
-        <img src="../assets/logo.png" alt="Kulüp Logosu" class="logo-img" />
+        <router-link to="/" class="brand-wordmark" aria-label="MedAB Ana Sayfa">
+          MED<span class="brand-accent">AB</span>
+        </router-link>
       </div>
-      <nav class="desktop-nav">
+
+      <nav class="desktop-nav" aria-label="Ana Menü">
         <router-link to="/">Ana Sayfa</router-link>
-        <router-link to="/hakkimizda">Hakkımızda</router-link>
-        <router-link to="/ekibimiz">Ekibimiz</router-link>
-        <router-link to="/etkinlikler">Etkinlikler</router-link>
-        <router-link to="/dergi">Dergi</router-link>
-        <router-link to="/raporlar">Faaliyet Kitapçıkları</router-link>
-        <router-link to="/galeri">Galeri</router-link>
+        <router-link to="/hakkimizda/">Hakkımızda</router-link>
+        <router-link to="/ekibimiz/">Ekibimiz</router-link>
+        <router-link to="/etkinlikler/">Etkinlikler</router-link>
+        <router-link to="/dergi/">Dergi</router-link>
+        <router-link to="/foyler/">Föyler</router-link>
+        <router-link to="/galeri/">Galeri</router-link>
       </nav>
-      <button class="hamburger" @click="toggleMenu" aria-label="Menü">
+
+      <button class="hamburger" aria-label="Menü" @click="toggleMenu">
         <span class="line" :class="{ 'line-top': isMenuOpen }"></span>
         <span class="line" :class="{ 'line-middle': isMenuOpen }"></span>
         <span class="line" :class="{ 'line-bottom': isMenuOpen }"></span>
       </button>
     </div>
+
     <div class="fullscreen-overlay" :class="{ 'is-open': isMenuOpen }">
-      <nav class="overlay-nav">
+      <nav class="overlay-nav" aria-label="Mobil Menü">
         <router-link to="/" @click="closeMenu">Ana Sayfa</router-link>
-        <router-link to="/hakkimizda" @click="closeMenu">Hakkımızda</router-link>
-        <router-link to="/ekibimiz" @click="closeMenu">Ekibimiz</router-link>
-        <router-link to="/etkinlikler" @click="closeMenu">Etkinlikler</router-link>
-        <router-link to="/dergi" @click="closeMenu">Dergi</router-link>
-        <router-link to="/raporlar" @click="closeMenu">Faaliyet Kitapçıkları</router-link>
-        <router-link to="/galeri" @click="closeMenu">Galeri</router-link>
+        <router-link to="/hakkimizda/" @click="closeMenu">Hakkımızda</router-link>
+        <router-link to="/ekibimiz/" @click="closeMenu">Ekibimiz</router-link>
+        <router-link to="/etkinlikler/" @click="closeMenu">Etkinlikler</router-link>
+        <router-link to="/dergi/" @click="closeMenu">Dergi</router-link>
+        <router-link to="/foyler/" @click="closeMenu">Föyler</router-link>
+        <router-link to="/galeri/" @click="closeMenu">Galeri</router-link>
       </nav>
     </div>
   </header>
@@ -44,6 +49,15 @@ export default {
       lastScrollY: 0
     }
   },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
+    window.addEventListener('resize', this.handleResize, { passive: true });
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('resize', this.handleResize);
+    document.body.style.overflow = '';
+  },
   methods: {
     handleScroll() {
       if (this.isMenuOpen) return;
@@ -54,7 +68,7 @@ export default {
       if (currentScrollY > 70 && currentScrollY > this.lastScrollY) {
         this.isHidden = true;
       } else {
-        this.isHidden = false; 
+        this.isHidden = false;
       }
 
       this.lastScrollY = currentScrollY;
@@ -79,21 +93,12 @@ export default {
         document.body.style.overflow = '';
       }
     }
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll, { passive: true });
-    window.addEventListener('resize', this.handleResize, { passive: true });
-  },
-  beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('resize', this.handleResize);
-    document.body.style.overflow = ''; 
   }
 }
 </script>
 
 <style lang="scss" scoped>
-$primary-color: #07478c;
+$primary-color: #e63946;
 $text-light: #ffffff;
 $header-height: 70px;
 
@@ -106,13 +111,13 @@ header {
   background-color: transparent;
   color: $text-light;
   transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
-  z-index: 50; 
+  z-index: 50;
 
   &.is-scrolled {
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.35);
   }
 
   &.is-menu-open {
@@ -146,38 +151,54 @@ header {
   display: flex;
   align-items: center;
 
-  .logo-img {
-    height: 55px;
-    width: auto;
-    max-width: 250px; 
-    object-fit: contain;
+  .brand-wordmark {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.65rem;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    .brand-accent {
+      color: $primary-color;
+    }
+
+    &:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
   }
 }
 
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 32px; 
+  gap: 32px;
 
   a {
-    color: $text-light;
+    color: rgba(255, 255, 255, 0.75);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
-    transition: opacity 0.3s ease;
+    transition: color 0.2s ease, opacity 0.2s ease;
 
     &:hover {
-      opacity: 0.7;
+      color: #ffffff;
+      opacity: 1;
     }
-    
+
     &.router-link-exact-active {
-      opacity: 0.5;
+      color: #ffffff;
+      opacity: 1;
+      font-weight: 700;
     }
   }
 }
 
 .hamburger {
-  display: none; 
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   width: 30px;
@@ -185,7 +206,7 @@ header {
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 60; 
+  z-index: 60;
 
   .line {
     display: block;
@@ -210,30 +231,30 @@ header {
 }
 
 .fullscreen-overlay {
-  display: none; 
+  display: none;
 }
 
 @media (max-width: 768px) {
   .desktop-nav {
-    display: none; 
+    display: none;
   }
 
   .hamburger {
-    display: flex; 
+    display: flex;
   }
 
   .fullscreen-overlay {
-    display: flex; 
+    display: flex;
     position: fixed;
-    top: $header-height; 
+    top: $header-height;
     left: 0;
     width: 100vw;
     height: calc(100dvh - $header-height);
     background-color: rgba(0, 0, 0, 1);
     flex-direction: column;
-    padding-top: 5vh; 
-    padding-bottom: 10vh; 
-    overflow-y: auto; 
+    padding-top: 5vh;
+    padding-bottom: 10vh;
+    overflow-y: auto;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease, visibility 0.4s, background-color 0.4s ease;
@@ -254,10 +275,10 @@ header {
       a {
         color: $text-light;
         text-decoration: none;
-        font-size: 28px; 
+        font-size: 28px;
         font-weight: bold;
         transition: opacity 0.3s;
-        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6); 
+        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
 
         &:hover {
           opacity: 0.7;
@@ -267,19 +288,17 @@ header {
   }
 
   .header-container {
-    justify-content: flex-end; 
+    justify-content: flex-end;
   }
 
   .brand {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 60vw;
-    display: flex;
-    justify-content: center;
 
-    .logo-img {
-      height: 35px;
+    .brand-wordmark {
+      font-size: 1.4rem;
+      letter-spacing: -0.8px;
     }
   }
 }

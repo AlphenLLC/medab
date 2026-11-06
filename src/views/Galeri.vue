@@ -1,128 +1,186 @@
 <template>
   <div class="galeri-sayfasi">
-    <div class="hero-arkaplan">
-      <div class="fade-overlay"></div>
-    </div>
-    <section class="galeri-container">
-      <div class="baslik-kapsayici">
-        <h2>MEDAB EXHIBIT</h2>
-        <p class="baslik-aciklamasi">
-         Kulüp çalışmalarını inceleyin.
-        </p>
-      </div>
-      <GalleryComponent :images="galleryData" />   
-    </section>
+    <main class="galeri-container">
+      
+      <!-- Arşiv sayacı kaldırılmış, kompakt editoryal başlık -->
+      <header class="compact-header">
+        <div class="header-top-row">
+          <span class="meta-season">2025 — 2026 DÖNEMİ</span>
+        </div>
+
+        <div class="header-main-row">
+          <h1 class="page-title">MED<span class="accent-blue">AB</span> EXHIBIT</h1>
+          <p class="page-desc">
+            Tüm etkinliklerimizden derlenen fotoğraf ve görsellerin yer aldığı sergi.
+          </p>
+        </div>
+      </header>
+
+      <!-- Rastgele Karıştırılmış Veriyi Alan Performanslı Izgara -->
+      <GalleryComponent :images="katalogGorselleri" />   
+    </main>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import GalleryComponent from '../components/GalleryComponent.vue';
+import { eventCatalog } from '../data/eventCatalog.js';
 
-const galleryData = ref([
-  { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg' },
-  { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Seminer', title: 'Tıp Semineri' },
-  { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Atölye', title: 'Uygulamalı Atölye' },
-  { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-    { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-      { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-        { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-          { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-            { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-              { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-                { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-                  { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-                    { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-                      { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-                        { url: 'https://r4.wallpaperflare.com/wallpaper/261/957/290/the-sky-night-tent-the-milky-way-wallpaper-86fedc2285962a008d3effabd97bf372.jpg', alt: 'Saha', title: 'Saha Çalışması' },
-]);
+const katalogGorselleri = ref([]);
+
+// Diziyi kasmadan rastgele karıştıran Fisher-Yates algoritması
+const karistir = (dizi) => {
+  const arr = [...dizi];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
+
+onMounted(() => {
+  const toplananGorseller = [];
+
+  // eventCatalog içerisindeki tüm etkinlikleri gez ve düzleştir
+  eventCatalog.forEach((etkinlik) => {
+    if (Array.isArray(etkinlik.icerik)) {
+      etkinlik.icerik.forEach((blok) => {
+        if (blok.tip === 'resim' && blok.url) {
+          toplananGorseller.push({
+            url: blok.url,
+            baslik: etkinlik.baslik,
+            yer: etkinlik.yer,
+            tarih: etkinlik.tarih
+          });
+        } else if (blok.tip === 'galeri' && Array.isArray(blok.gorseller)) {
+          blok.gorseller.forEach((gorselUrl) => {
+            if (gorselUrl) {
+              toplananGorseller.push({
+                url: gorselUrl,
+                baslik: etkinlik.baslik,
+                yer: etkinlik.yer,
+                tarih: etkinlik.tarih
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+
+  // Mükerrer URL'leri temizle ve rastgele diz
+  const benzersizler = Array.from(
+    new Map(toplananGorseller.map((item) => [item.url, item])).values()
+  );
+
+  katalogGorselleri.value = karistir(benzersizler);
+});
 </script>
 
 <style lang="scss" scoped>
 .galeri-sayfasi {
-  position: relative;
   width: 100%;
   min-height: 100vh;
   background-color: #000000; 
-}
-
-.hero-arkaplan {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 550px; 
-  background-image: url('https://images.unsplash.com/photo-1608453908394-f48474d01c23?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
-  background-size: cover;
-  background-position: center 30%;
-  z-index: 0;
-  pointer-events: none; 
-
-  .fade-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,1) 100%);
-  }
+  color: #ffffff;
 }
 
 .galeri-container {
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding-top: 140px; 
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 3rem; 
-  
-  position: relative; 
-  z-index: 1; 
+  padding-top: 110px; 
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 5rem; 
+}
 
-  .baslik-kapsayici {
-    position: relative;
-    text-align: center;
-    margin-bottom: 3.5rem;
-    
-    h2 {
-      font-size: 3.2rem; 
-      margin-bottom: 0.8rem;
-      color: #ffffff;
-      letter-spacing: 2px;
+.compact-header {
+  margin-bottom: 2.4rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  .header-top-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+
+    .meta-season {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      color: #71717a;
       text-transform: uppercase;
-      font-weight: 900;
-      font-style: italic;
-      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); 
     }
+  }
 
-    .baslik-aciklamasi {
-      color: #cccccc;
-      font-size: 1.1rem;
-      max-width: 550px;
-      margin: 0 auto;
-      line-height: 1.6;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  .header-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+  }
+
+  .page-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    letter-spacing: -1.5px;
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    .accent-blue {
+      color: #2563eb;
     }
+  }
+
+  .page-desc {
+    font-family: 'Montserrat', sans-serif;
+    color: #a1a1aa;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    text-align: right;
+    max-width: 420px;
   }
 }
 
 @media (max-width: 768px) {
-  .hero-arkaplan {
-    height: 400px; 
+  .galeri-container {
+    padding-top: 85px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 3.5rem;
   }
 
-  .galeri-container {
-    padding-top: 100px;
-    
-    .baslik-kapsayici {
-      margin-bottom: 2.5rem;
-      
-      h2 { font-size: 2.2rem; }
-      
-      .baslik-aciklamasi {
-        font-size: 0.95rem;
-        padding: 0 1rem;
-      }
+  .compact-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+
+    .header-top-row .meta-season {
+      font-size: 0.68rem;
+      letter-spacing: 1.2px;
+    }
+
+    .header-main-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .page-title {
+      font-size: 1.85rem;
+      letter-spacing: -1px;
+    }
+
+    .page-desc {
+      font-size: 0.82rem;
+      text-align: left;
+      line-height: 1.4;
+      color: #71717a;
     }
   }
 }
